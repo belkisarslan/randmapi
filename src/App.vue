@@ -1,11 +1,9 @@
 <script setup>
-import Characters from './components/Characters/Characters.vue'
+
 </script>
 
 <template>
-   <Characters />
-
- 
+    <router-view></router-view>
 </template>
 
 <style scoped>

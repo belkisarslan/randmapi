@@ -31,7 +31,6 @@ export default {
     async fetchCharacters() {
       try {
         const response = await axios.get('https://rickandmortyapi.com/api/character')
-        console.log(response)
         this.characters = response.data.results
       } catch (error) {
         console.error('Veri çekilirken hata oluştu:', error)

@@ -1,3 +1,6 @@
 <template>
-    <h1>home</h1>
+    <Content/>
 </template>
+<script setup>
+import Content from '../components/Content/Content.vue';
+</script>

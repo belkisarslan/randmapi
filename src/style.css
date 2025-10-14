@@ -2,6 +2,8 @@ body {
     /* font-family: "Inter", sans-serif; */
     font-size: 16px;
     background-color: #000;
+    background-image: url("https://images.pexels.com/photos/3411139/pexels-photo-3411139.jpeg");
+    background-size: cover;
   }
   
   div[data-nextjs-scroll-focus-boundary] {
@@ -12,6 +14,7 @@ body {
     display: grid;
     grid-template-columns: 1fr min(1440px, 94%) 1fr;
     grid-template-rows: 96px auto 72px;
+    
   }
   
   .container > * {

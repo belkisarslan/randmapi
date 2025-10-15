@@ -1,13 +1,13 @@
 <template>
   <div>
     <div :class="styles.characterSection">
-      <h3 :class="styles.title">Başlık</h3>
+      <h3 :class="styles.title">Rick And Morty Karakterleri</h3>
       <div :class="styles.characters">
-        <div :class="styles.character" v-for="character in characters" :key="character.id">
-          <img :src="character.image" :alt="character.name" />
+        <div :class="styles.character" v-for="(c,i) in characters" :key="c.id">
+          <img :src="c.image" :alt="c.name" />
           <div :class="styles.characterOverlay">
-            <div :class="styles.characterName">{{ character.name }}</div>
-            <div :class="styles.characterInfo">{{ character.species }} — {{ character.status }}</div>
+            <div :class="styles.characterName">{{ c.name }}</div>
+            <div :class="styles.characterInfo">{{ c.species }} — {{ c.status }}</div>
           </div>
         </div>
       </div>
@@ -17,36 +17,24 @@
 
 <script>
 import styles from './styles.module.css'
-import axios from 'axios'
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
-  name: 'Characters',
-  data() {
+  setup() {
+    const store = useStore()
+
+    const characters = computed(() => store.getters['characters/allCharacters'])
+
+    onMounted(() => {
+      store.dispatch('characters/fetchCharacters')
+    })
+
     return {
+      characters,
       styles: styles,
-      characters: [],
-      loading: true,
     }
-  },
-  methods: {
-    async fetchCharacters() {
-      try {
-        const response = await axios.get('https://rickandmortyapi.com/api/character')
-        this.characters = response.data.results
-      } catch (error) {
-        console.error('Veri çekilirken hata oluştu:', error)
-      } finally {
-        this.loading = false
-      }
-    },
-
-  },
-  computed: {
-
-  },
-  mounted() {
-    this.fetchCharacters()
   }
 }
 </script>
 
-<style></style>

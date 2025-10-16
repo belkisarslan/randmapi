@@ -9,11 +9,11 @@
         <router-link to="/" :class="styles.logo">
           Anasayfa
         </router-link>
-        <router-link to="/" :class="styles.logo">
-          Anasayfa
+        <router-link to="/game" :class="styles.logo">
+          Oyun
         </router-link>
-        <router-link to="/" :class="styles.logo">
-          Anasayfa
+        <router-link to="/characters" :class="styles.logo">
+          Karakterler
         </router-link>
       </nav>
     </div>

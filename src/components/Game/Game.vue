@@ -17,9 +17,13 @@
         <div class="alert">
             <div class="alert-main">
                 <p class="p">Tebrikler🎉</p>
-                <div class="button">
+                <div class="buttons">
                     <button @click="resetGame" class="later-btn">Tekrar Oyna!</button>
-                    <button @click.self="gameFinished = false;" class="later-btn">Kapat</button>
+                    <button @click.self="gameFinished = false;" class="later-btn">
+                        <router-link class="link" to="/">
+                        Anasayfaya Dön
+                    </router-link>
+                    </button>
                 </div>
             </div>
         </div>
@@ -86,7 +90,9 @@ export default {
             }
 
             if (this.matchedCards.length == this.cards.length) {
-                this.gameFinished = true
+                setTimeout(() => {
+                     this.gameFinished = true
+                }, 500)
             }
         },
 
@@ -125,7 +131,7 @@ export default {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(100px, 150px));
+    grid-template-columns: repeat(4, minmax(100px, 50px));
     gap: 16px;
     justify-content: center;
 }
@@ -205,32 +211,54 @@ export default {
 }
 
 .alert-main {
-    display: flex;
+     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    width: 500px;
-    padding: 20px;
-    background-color: #F8F9FA;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px 3px rgba(0, 0, 0, 0.5);
-    transition: all 0.2s ease-in;
-    font-family: Poppins, sans-serif;
-    cursor: default;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 26px 34px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 660px;
+   gap: 50px;
 }
 
 .alert-main .p {
-    color: #6C757D;
+    color: white;
     text-align: center;
 }
 
-.button {
+.buttons {
     width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
+    
 }
-
+.link{
+    text-decoration: none;
+    color: white;
+}
+.later-btn{
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+}
+.later-btn:hover{
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: border-radius 0.5s ease;
+}
 @media (max-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, minmax(90px, 120px));

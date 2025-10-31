@@ -18,11 +18,14 @@
             <div class="alert-main">
                 <p class="p">Tebrikler🎉</p>
                 <div class="buttons">
-                    <button @click="resetGame" class="later-btn">Tekrar Oyna!</button>
+                    <button class="later-btn">
+                        <router-link class="link" to="/characters">
+                          Tekrar Oyna!
+                        </router-link></button>
                     <button @click.self="gameFinished = false;" class="later-btn">
                         <router-link class="link" to="/">
-                        Anasayfaya Dön
-                    </router-link>
+                            Anasayfaya Dön
+                        </router-link>
                     </button>
                 </div>
             </div>
@@ -34,7 +37,6 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    name: 'Game',
 
     data() {
         return {
@@ -46,67 +48,64 @@ export default {
     },
 
     computed: {
-        ...mapGetters('characters', ['allCards']),
+        ...mapGetters('favorites', ['allFavorites']),
         cards() {
-            return this.allCards
-        },
-    },
-
-    methods: {
-        ...mapActions('characters', ['fetchCharacters']),
-
-        flipCard(index) {
-            // Eğer tıklama kilitliyse veya kart zaten eşleşmişse
-            if (this.lockBoard || this.matchedCards.includes(index)) return
-
-            // Eğer kart zaten açıksa, tekrar ekleme
-            if (this.flippedCards.includes(index)) return
-
-            this.flippedCards.push(index)
-
-            // İki kart seçildiyse kontrol et
-            if (this.flippedCards.length === 2) {
-                this.lockBoard = true
-                this.checkMatch()
-            }
-        },
-
-        checkMatch() {
-            const [firstIndex, secondIndex] = this.flippedCards
-            const firstCard = this.cards[firstIndex]
-            const secondCard = this.cards[secondIndex]
-
-            if (firstCard.name === secondCard.name) {
-                // Eşleşme varsa
-                this.matchedCards.push(firstIndex, secondIndex)
-                this.flippedCards = []
-                this.lockBoard = false
-            } else {
-                // Eşleşme yoksa
-                setTimeout(() => {
-                    this.flippedCards = []
-                    this.lockBoard = false
-                }, 1000)
-            }
-
-            if (this.matchedCards.length == this.cards.length) {
-                setTimeout(() => {
-                     this.gameFinished = true
-                }, 500)
-            }
-        },
-
-        resetGame() {
-            this.matchedCards = []
-            this.gameFinished = false
-            this.fetchCharacters()
+            const duplicated = [...this.allFavorites, ...this.allFavorites]
+            return duplicated.sort(() => Math.random() - 0.5)
         }
     },
+        
+    methods: {
+            ...mapActions('favorites', ['allFavorites']),
 
-    mounted() {
-        this.fetchCharacters()
-    },
-}
+            flipCard(index) {
+                // Eğer tıklama kilitliyse veya kart zaten eşleşmişse
+                if (this.lockBoard || this.matchedCards.includes(index)) return
+
+                // Eğer kart zaten açıksa, tekrar ekleme
+                if (this.flippedCards.includes(index)) return
+
+                this.flippedCards.push(index)
+
+                // İki kart seçildiyse kontrol et
+                if (this.flippedCards.length === 2) {
+                    this.lockBoard = true
+                    this.checkMatch()
+                }
+            },
+
+            checkMatch() {
+                const [firstIndex, secondIndex] = this.flippedCards
+                const firstCard = this.cards[firstIndex]
+                const secondCard = this.cards[secondIndex]
+
+                if (firstCard.name === secondCard.name) {
+                    // Eşleşme varsa
+                    this.matchedCards.push(firstIndex, secondIndex)
+                    this.flippedCards = []
+                    this.lockBoard = false
+                } else {
+                    // Eşleşme yoksa
+                    setTimeout(() => {
+                        this.flippedCards = []
+                        this.lockBoard = false
+                    }, 1000)
+                }
+
+                if (this.matchedCards.length == this.cards.length) {
+                    setTimeout(() => {
+                        this.gameFinished = true
+                    }, 500)
+                }
+            },
+
+            resetGame() {
+                this.matchedCards = []
+                this.gameFinished = false
+            }
+    }
+
+}  
 </script>
 
 <style scoped>
@@ -211,7 +210,7 @@ export default {
 }
 
 .alert-main {
-     display: flex;
+    display: flex;
     align-items: center;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.01);
@@ -223,7 +222,7 @@ export default {
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     max-width: 660px;
-   gap: 50px;
+    gap: 50px;
 }
 
 .alert-main .p {
@@ -236,14 +235,16 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
-    
+
+
 }
-.link{
+
+.link {
     text-decoration: none;
     color: white;
 }
-.later-btn{
+
+.later-btn {
     text-decoration: none;
     background: rgba(255, 255, 255, 0.01);
     backdrop-filter: blur(20px);
@@ -253,12 +254,14 @@ export default {
     padding: 10px;
     font-family: "Inter", sans-serif;
 }
-.later-btn:hover{
+
+.later-btn:hover {
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     transition: border-radius 0.5s ease;
 }
+
 @media (max-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, minmax(90px, 120px));

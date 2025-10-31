@@ -5,13 +5,8 @@
                 <router-link class="link" to="/">
                     RANDMapi
                 </router-link>
+                6 tane karakter seçer misin?
                 <div class="links">
-                    <router-link class="link" to="/">
-                        Anasayfa
-                    </router-link>
-                    <router-link class="link" to="/game">
-                        Oyun
-                    </router-link>
                     <router-link class="link" to="/characters">
                         Karakterler
                     </router-link>

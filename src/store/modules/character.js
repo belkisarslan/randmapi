@@ -4,7 +4,6 @@ export default {
   state() {
     return {
       characters: [],
-      cards: [],
     }
   },
 
@@ -12,9 +11,6 @@ export default {
     setCharacters(state, characters) {
       state.characters = characters
     },
-    setCards(state,cards){
-      state.cards = cards
-    }
   },
 
   actions: {
@@ -22,17 +18,14 @@ export default {
       try {
         const response = await fetch('https://rickandmortyapi.com/api/character')
         const data = await response.json()
-        const selected = data.results.slice(0, 6)
-        const duplicated = [...selected, ...selected]
-        const shuffled = duplicated.sort(() => Math.random() - 0.5)
         const simplified = data.results.map(c => ({
+          id: c.id,
           name: c.name,
           species: c.species,
           status: c.status,
           image: c.image,
         }))
         commit('setCharacters', simplified)
-        commit('setCards', shuffled)
       } catch (error) {
         console.error('Veri çekme hatası:', error)
         console.error('API hatası:', error)
@@ -44,6 +37,6 @@ export default {
     allCharacters(state) {
       return state.characters
     },
-    allCards: (state) => state.cards
+    
   },
 }

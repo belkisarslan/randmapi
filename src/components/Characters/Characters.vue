@@ -20,7 +20,6 @@
       <div :class="styles.alertMain">
         <p :class="styles.p">6 karakter seçtin! Oyunu başlatmak ister misin?</p>
         <div :class="styles.buttons">
-          <button :class="styles.laterBtn"><router-link :class="styles.link" to="/">Anasayfaya Dön</router-link></button>
           <button :class="styles.laterBtn"><router-link :class="styles.link" to="/game" >Başla!</router-link></button>
         </div>
       </div>

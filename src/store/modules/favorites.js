@@ -10,7 +10,9 @@ export default {
     allFavorites(state) {
       return state.favorites
     },
-     isGameReady: (state) => state.gameReady,
+    isGameReady(state){
+      return state.gameReady
+    },
   },
 
   mutations: {
@@ -31,6 +33,10 @@ export default {
         state.gameReady = false
       }
   },
+
+  CLEAR_FAVORITES(state) {
+      state.favorites = [] 
+    },
    
   
   },
@@ -43,7 +49,11 @@ export default {
     } else if (state.favorites.length < 6) {
       commit('ADD_FAVORITE', character)
     }
-  }
+  },
+
+   clearFavorites({ commit }) {
+      commit('CLEAR_FAVORITES')
+    },
   },
 
 }

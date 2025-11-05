@@ -18,11 +18,11 @@
             <div class="alert-main">
                 <p class="p">Tebrikler🎉</p>
                 <div class="buttons">
-                    <button class="later-btn">
+                    <button  @click="resetGame()" class="later-btn">
                         <router-link class="link" to="/characters">
                           Tekrar Oyna!
                         </router-link></button>
-                    <button @click.self="gameFinished = false;" class="later-btn">
+                    <button @click="resetGame()" class="later-btn">
                         <router-link class="link" to="/">
                             Anasayfaya Dön
                         </router-link>
@@ -56,6 +56,7 @@ export default {
     },
         
     methods: {
+        ...mapActions('favorites', ['clearFavorites']),
 
             flipCard(index) {
                 // Eğer tıklama kilitliyse veya kart zaten eşleşmişse
@@ -99,8 +100,10 @@ export default {
             },
 
             resetGame() {
+                this.clearFavorites()
                 this.matchedCards = []
                 this.gameFinished = false
+                console.log(this.$store.state.favorites.favorites)
             }
     }
 

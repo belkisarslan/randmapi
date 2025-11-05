@@ -21,9 +21,7 @@ export default {
     }
     if (state.favorites.length === 6) {
         state.favorites.sort(() => Math.random() - 0.5)
-        console.log("kartlar toplandı")
         state.gameReady = true
-        console.log(state.gameReady)
     }
   },
 

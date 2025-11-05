@@ -56,7 +56,6 @@ export default {
     },
         
     methods: {
-            ...mapActions('favorites', ['allFavorites']),
 
             flipCard(index) {
                 // Eğer tıklama kilitliyse veya kart zaten eşleşmişse

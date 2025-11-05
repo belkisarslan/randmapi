@@ -48,7 +48,6 @@ export default {
     isGameReady(newVal) {
       if (newVal) {
         this.showGameModal = true
-        console.log(this.showGameModal)
       }
     }
   },
@@ -56,8 +55,7 @@ export default {
   computed: {
 
     ...mapGetters('characters', ['allCharacters']),
-    ...mapGetters('favorites', ['allFavorites']),
-    ...mapGetters('favorites', ['isGameReady']),
+    ...mapGetters('favorites', ['allFavorites','isGameReady']),
 
     processedCharacters() {
       return this.allCharacters.map(char => ({

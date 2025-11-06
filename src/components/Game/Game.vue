@@ -103,7 +103,6 @@ export default {
                 this.clearFavorites()
                 this.matchedCards = []
                 this.gameFinished = false
-                console.log(this.$store.state.favorites.favorites)
             }
     }
 
